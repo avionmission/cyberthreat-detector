@@ -1,0 +1,44 @@
+# IDE and Editor files
+.vscode/
+.idea/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python virtual environment
+venv/
+env/
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Model files (optional - uncomment if you don't want to track trained models)
+# models/*.pkl
+# models/*.json
+
+# Data files (optional - uncomment if you don't want to track datasets)
+# data/*.csv
+# data/*.json

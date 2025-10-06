@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold text-primary">
+                    <i class="fas fa-robot me-3"></i>
+                    AI-Driven Cybersecurity
+                </h1>
+                <p class="lead">Advanced threat detection using machine learning to analyze UNIX system logs and identify potential security risks in real-time.</p>
+                <div class="d-flex gap-3">
+                    <button class="btn btn-primary btn-lg" onclick="scrollToAnalyzer()">
+                        <i class="fas fa-search me-2"></i>Start Analysis
+                    </button>
+                    <button class="btn btn-outline-secondary btn-lg" onclick="loadSampleLogs()">
+                        <i class="fas fa-file-alt me-2"></i>Load Sample
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-brain text-primary"></i>
+                        <h5>ML-Powered</h5>
+                        <p>Random Forest & Isolation Forest algorithms</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-clock text-success"></i>
+                        <h5>Real-time</h5>
+                        <p>Instant threat detection and analysis</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line text-warning"></i>
+                        <h5>Risk Scoring</h5>
+                        <p>Comprehensive threat assessment</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-server text-info"></i>
+                        <h5>UNIX Logs</h5>
+                        <p>Supports multiple log formats</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="analyzer" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">
+                            <i class="fas fa-terminal me-2"></i>
+                            Log Analysis
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="logInput" class="form-label">Paste your UNIX system logs here:</label>
+                            <textarea 
+                                id="logInput" 
+                                class="form-control" 
+                                rows="12" 
+                                placeholder="Jan 15 10:30:15 server1 sshd[1234]: Accepted publickey for user1 from 192.168.1.100&#10;Jan 15 10:31:20 server1 kernel: USB disconnect, address 1&#10;..."></textarea>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button id="analyzeBtn" class="btn btn-success" onclick="analyzeLogs()">
+                                <i class="fas fa-play me-2"></i>Analyze Logs
+                            </button>
+                            <button class="btn btn-outline-primary" onclick="loadSampleLogs()">
+                                <i class="fas fa-download me-2"></i>Load Sample
+                            </button>
+                            <button class="btn btn-outline-secondary" onclick="clearLogs()">
+                                <i class="fas fa-trash me-2"></i>Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Quick Stats
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="quickStats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Logs:</span>
+                                <span id="totalLogs" class="stat-value">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Threats Detected:</span>
+                                <span id="threatsDetected" class="stat-value text-danger">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Risk Score:</span>
+                                <span id="riskScore" class="stat-value">0%</span>
+                            </div>
+                        </div>
+                        <div id="modelStats" class="mt-3">
+                            <h6>Model Information</h6>
+                            <div id="modelInfo">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="results" class="py-5 bg-light" style="display: none;">
+    <div class="container">
+        <h3 class="mb-4">
+            <i class="fas fa-chart-bar me-2"></i>
+            Analysis Results
+        </h3>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">Detected Threats</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="threatsList"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">Threat Distribution</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="threatChart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="loadingModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center py-4">
+                <div class="spinner-border text-primary mb-3" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <h5>Analyzing logs with AI models...</h5>
+                <p class="text-muted">This may take a few moments</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

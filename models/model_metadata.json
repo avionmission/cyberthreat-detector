@@ -1,0 +1,33 @@
+{
+  "model_version": "1.0",
+  "training_date": "2025-10-06T18:00:28.359815",
+  "feature_names": [
+    "log_length",
+    "word_count",
+    "char_count",
+    "failed_count",
+    "password_count",
+    "root_count",
+    "admin_count",
+    "sudo_count",
+    "error_count",
+    "connection_count",
+    "attack_count",
+    "ip_count",
+    "has_external_ip",
+    "port_count",
+    "has_suspicious_port",
+    "hour",
+    "is_night_time",
+    "digit_ratio",
+    "special_char_ratio",
+    "uppercase_ratio",
+    "http_status",
+    "is_http_error"
+  ],
+  "training_samples": 4000,
+  "test_samples": 1000,
+  "rf_accuracy": 0.998,
+  "if_accuracy": 0.691,
+  "feature_count": 22
+}
