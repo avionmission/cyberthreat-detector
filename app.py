@@ -67,23 +67,23 @@ def get_stats():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+# Initialize app on startup (for production servers)
+os.makedirs('data', exist_ok=True)
+os.makedirs('models', exist_ok=True)
+
+print("AI Cybersecurity Threat Detector")
+print("=" * 40)
+
+# Check if models are loaded
+if threat_detector.model_loaded:
+    print("Pre-trained models loaded successfully!")
+    print("Starting web application...")
+else:
+    print("Warning: Pre-trained models not found!")
+    print("Please run the 'train_models.ipynb' notebook first to train the models.")
+    print("Starting web application in demo mode...")
+
 if __name__ == '__main__':
-    # Ensure directories exist
-    os.makedirs('data', exist_ok=True)
-    os.makedirs('models', exist_ok=True)
-    
-    print("AI Cybersecurity Threat Detector")
-    print("=" * 40)
-    
-    # Check if models are loaded
-    if threat_detector.model_loaded:
-        print("Pre-trained models loaded successfully!")
-        print("Starting web application...")
-    else:
-        print("Warning: Pre-trained models not found!")
-        print("Please run the 'train_models.ipynb' notebook first to train the models.")
-        print("Starting web application in demo mode...")
-    
-    # Use PORT environment variable for cloud deployment
+    # Development server (local only)
     port = int(os.environ.get('PORT', 5000))
     app.run(debug=False, host='0.0.0.0', port=port)
